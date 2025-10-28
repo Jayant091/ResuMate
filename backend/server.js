@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 5000;
 
 // ✅ Allow both localhost and deployed frontend
 const allowedOrigins = [
-  'https://resume-mu-sable-65.vercel.app'
+  'https://resume-mu-sable-65.vercel.app',
   'http://localhost:5173'
 ];
 
