@@ -15,14 +15,14 @@ console.log('GEMINI_API_KEY:', process.env.GEMINI_API_KEY ? 'Set' : 'Not set');
 // Connect to MongoDB
 connectDB();
 
-// Config
-const PORT = process.env.PORT || 5000;
+
 
 // ✅ Allow both localhost and deployed frontend
-const allowedOrigins = [
+const allowedOrigins = new Set([
+  process.env.CORS_ORIGIN ||
   'https://resume-mu-sable-65.vercel.app',
-  'http://localhost:5173'
-];
+  'http://localhost:5173',
+]);
 
 // App
 const app = express();
