@@ -15,12 +15,12 @@ console.log('GEMINI_API_KEY:', process.env.GEMINI_API_KEY ? 'Set' : 'Not set');
 // Connect to MongoDB
 connectDB();
 
-
+// ✅ Config
+const PORT = process.env.PORT || 5000;
 
 // ✅ Allow both localhost and deployed frontend
 const allowedOrigins = new Set([
-  process.env.CORS_ORIGIN ||
-  'https://resume-mu-sable-65.vercel.app',
+  'https://resu-mate-nu.vercel.app',  // <-- your real frontend URL
   'http://localhost:5173',
 ]);
 
@@ -31,7 +31,7 @@ const app = express();
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.has(origin)) {
         callback(null, true);
       } else {
         console.warn(`❌ CORS blocked request from origin: ${origin}`);
@@ -44,12 +44,12 @@ app.use(
 
 app.use(express.json({ limit: '2mb' }));
 
-// Health check
+// ✅ Health check
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, service: 'resumate-backend' });
 });
 
-// Routes
+// ✅ Routes
 import authRouter from './routes/authRoutes.js';
 import resumeRouter from './routes/resumeRoutes.js';
 import aiRouter from './routes/aiRoutes.js';
@@ -58,7 +58,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/resumes', resumeRouter);
 app.use('/api', aiRouter);
 
-// Start server
+// ✅ Start server
 app.listen(PORT, () => {
   console.log(`✅ ResuMate backend listening on port ${PORT}`);
 });
