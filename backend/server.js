@@ -17,13 +17,31 @@ connectDB();
 
 // Config
 const PORT = process.env.PORT || 5000;
-const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173';
+
+// ✅ Allow both localhost and deployed frontend
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://resu-mate-nu.vercel.app'
+];
 
 // App
 const app = express();
 
-// Middleware
-app.use(cors({ origin: ["https://resu-mate-nu.vercel.app", "http://localhost:5173"], credentials: true }));
+// ✅ Proper CORS middleware
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.warn(`❌ CORS blocked request from origin: ${origin}`);
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  })
+);
+
 app.use(express.json({ limit: '2mb' }));
 
 // Health check
@@ -42,8 +60,5 @@ app.use('/api', aiRouter);
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`ResuMate backend listening on port ${PORT}`);
+  console.log(`✅ ResuMate backend listening on port ${PORT}`);
 });
-
-
-
