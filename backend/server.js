@@ -23,7 +23,7 @@ const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173';
 const app = express();
 
 // Middleware
-app.use(cors({ origin: CORS_ORIGIN, credentials: true }));
+app.use(cors({ origin: ["https://resu-mate-nu.vercel.app", "http://localhost:5173"], credentials: true }));
 app.use(express.json({ limit: '2mb' }));
 
 // Health check
