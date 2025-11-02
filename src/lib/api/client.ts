@@ -1,5 +1,5 @@
 // API client for backend communication
-const API_BASE_URL = 'https://resumate-4wr1.onrender.com';
+const API_BASE_URL = 'https://resumate-4wr1.onrender.com/api';
 
 // Get JWT token from localStorage
 function getAuthToken(): string | null {
