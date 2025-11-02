@@ -23,10 +23,7 @@ const PORT = process.env.PORT || 5000;
 
 // ✅ Allowed frontend URLs (CORS)
 const allowedOrigins = new Set([
-  'https://resu-mate-nu.vercel.app',   // your deployed frontend
-  'https://resu-mate.vercel.app',      // optional alternate
-  'http://localhost:5173',             // local dev
-  'https://resumate-4wr1.onrender.com' // backend domain (for internal use)
+  'https://resume-mu-sable-65.vercel.app' // backend domain (for internal use)
 ]);
 
 // ✅ CORS setup
